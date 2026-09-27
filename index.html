@@ -1,0 +1,1163 @@
+<title>Karie's 30th PARTY!!!</title>
+<link rel="icon" href="favicon.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFCFD2;
+    --win-chrome: #FFAFC5;
+    --win-body: #fff;
+    --win-border: #999;
+    --win-title-stripe: #bbb7ae;
+    --title-text: #000;
+    --text: #2c2417;
+    --text-muted: #8a7e6e;
+    --pink: #de0086;
+    --pink-light: #f6d5d5;
+    --pink-dark: #b1006b;
+    --cream: #fdf5ec;
+    --warm-gray: #e8e0d4;
+    --selection-bg: #de0086;
+    --selection-text: #fff;
+    --shadow: rgba(0,0,0,0.18);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1a1612;
+      --win-chrome: #2e2a24;
+      --win-body: #241f1a;
+      --win-border: #444;
+      --win-title-stripe: #3a352e;
+      --title-text: #e8ddd0;
+      --text: #e0d5c5;
+      --text-muted: #8a7e6e;
+      --cream: #2a2420;
+      --warm-gray: #332e28;
+      --shadow: rgba(0,0,0,0.4);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1a1612;
+    --win-chrome: #2e2a24;
+    --win-body: #241f1a;
+    --win-border: #444;
+    --win-title-stripe: #3a352e;
+    --title-text: #e8ddd0;
+    --text: #e0d5c5;
+    --text-muted: #8a7e6e;
+    --cream: #2a2420;
+    --warm-gray: #332e28;
+    --shadow: rgba(0,0,0,0.4);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body { width: 100%; min-height: 100vh; min-height: 100dvh; overflow-x: hidden; }
+
+  body {
+    background: var(--bg);
+    font-family: 'Silkscreen', 'DM Sans', -apple-system, sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    cursor: default;
+  }
+
+  /* ══════════ MAC OS 9 WINDOW ══════════ */
+  .window {
+    width: 100%; max-width: 520px;
+    border: 1px solid var(--win-border);
+    border-radius: 6px;
+    box-shadow: 1px 2px 8px var(--shadow);
+    overflow: hidden;
+    background: var(--win-chrome);
+  }
+
+  /* SPARKLE CURSOR */
+  .sparkle-canvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* FLOATING STARS BG */
+  .stars-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+  .star-float {
+    position: absolute;
+    font-size: 1rem;
+    opacity: 0.5;
+    animation: floatStar linear infinite;
+  }
+  @keyframes floatStar {
+    0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.35; }
+    90% { opacity: 0.35; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* Title bar with pinstripes */
+  .title-bar {
+    position: relative;
+    display: flex; align-items: center;
+    padding: 0;
+    min-height: 22px;
+    background: var(--win-chrome);
+    border-bottom: 1px solid var(--win-border);
+    /* pinstripe pattern */
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent, transparent 1px,
+      var(--win-title-stripe) 1px, var(--win-title-stripe) 2px
+    );
+    background-size: 100% 2px;
+  }
+
+  /* Close box — small square on the left */
+  .close-box {
+    width: 12px; height: 12px;
+    border: 1px solid var(--win-border);
+    background: var(--win-chrome);
+    margin: 0 0 0 8px;
+    flex-shrink: 0;
+    cursor: default;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Window title — centered label with solid bg behind text */
+  .win-title {
+    flex: 1;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--title-text);
+    font-family: 'Silkscreen', sans-serif;
+    letter-spacing: 0.3px;
+    padding: 2px 0;
+    position: relative;
+    z-index: 1;
+  }
+  .win-title span {
+    background: var(--win-chrome);
+    padding: 0 10px;
+    position: relative;
+  }
+
+  /* Collapse/zoom boxes on the right */
+  .zoom-boxes {
+    display: flex; gap: 3px; margin-right: 8px; flex-shrink: 0;
+    position: relative; z-index: 1;
+  }
+  .zoom-box {
+    width: 12px; height: 12px;
+    border: 1px solid var(--win-border);
+    background: var(--win-chrome);
+    cursor: default;
+  }
+
+  /* Window body */
+  .win-body {
+    background: var(--win-body);
+    padding: 16px;
+  }
+
+  /* Scrollbar groove on right (decorative) */
+  .win-scroll {
+    position: relative;
+  }
+  .win-scroll::after {
+    content: '';
+    position: absolute; top: 0; right: 0; bottom: 0;
+    width: 16px;
+    background: var(--win-chrome);
+    border-left: 1px solid var(--win-border);
+  }
+  .win-scroll .win-body {
+    margin-right: 16px;
+  }
+
+  
+
+  /* ══════════ LOGIN SCREEN ══════════ */
+  .login-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg);
+    transition: opacity 0.5s, visibility 0.5s;
+  }
+  .login-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+  .login-pattern {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      radial-gradient(circle at 30% 40%, rgba(222,0,134,0.06) 0%, transparent 50%),
+      radial-gradient(circle at 70% 60%, rgba(246,213,213,0.15) 0%, transparent 50%);
+  }
+
+  .login-box {
+    position: relative; z-index: 1;
+    width: 92%; max-width: 380px;
+  }
+  .login-box .win-body {
+    padding: 24px 20px 18px;
+    text-align: center;
+  }
+  .login-avatar { font-size: 44px; margin-bottom: 10px; }
+  .login-welcome {
+    font-family: 'Silkscreen', monospace;
+    font-size: 16px; font-weight: 700; color: var(--pink);
+    margin-bottom: 4px;
+  }
+  .login-subtitle {
+    font-size: 12px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.5;
+  }
+  .login-field {
+    display: flex; flex-direction: column; align-items: stretch;
+    gap: 4px; margin-bottom: 10px; text-align: left;
+  }
+  .login-field label {
+    font-size: 11px; font-weight: 700;
+  }
+  .text-input {
+    flex: 1; padding: 5px 8px;
+    background: var(--win-body); color: var(--text);
+    border: 1px solid var(--win-border);
+    border-radius: 3px;
+    font-size: 13px; font-family: inherit; outline: none;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .text-input:focus { border-color: var(--pink); box-shadow: 0 0 0 2px rgba(222,0,134,0.15); }
+
+  .login-error {
+    font-size: 12px; color: #c00;
+    min-height: 18px; margin-bottom: 8px;
+  }
+  .login-actions { display: flex; justify-content: center; gap: 8px; }
+
+  .mac-btn {
+    font-family: 'Silkscreen', sans-serif; font-size: 12px; font-weight: 400;
+    padding: 5px 22px;
+    background: var(--win-chrome); color: var(--title-text);
+    border: 1px solid var(--win-border); border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+    cursor: default; outline: none;
+  }
+  .mac-btn:active { background: var(--warm-gray); box-shadow: inset 0 1px 2px rgba(0,0,0,0.1); }
+  .mac-btn-primary {
+    background: var(--pink); color: #fff; border-color: var(--pink-dark);
+    box-shadow: 0 1px 3px rgba(222,0,134,0.3);
+  }
+  .mac-btn-primary:active { background: var(--pink-dark); }
+
+  .login-hint {
+    font-size: 11px; color: var(--text-muted);
+    margin-top: 12px; font-style: italic;
+  }
+
+  /* ══════════ DESKTOP ══════════ */
+  .desktop {
+    position: relative; z-index: 1;
+    min-height: 100vh; min-height: 100dvh;
+    padding: 20px 16px 40px;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+  }
+
+  /* ── MENU BAR (top, like classic Mac) ── */
+  .menu-bar-top {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50;
+    width: 100vw; margin-left: calc(-50vw + 50%);
+    background: var(--win-chrome);
+    border-bottom: 1px solid var(--win-border);
+    padding: 2px 12px;
+    display: flex; align-items: center; gap: 0;
+    font-size: 13px; font-weight: 700;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .menu-logo {
+    font-family: 'Silkscreen', monospace; font-size: 13px;
+    color: var(--pink); margin-right: 16px;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .menu-items { display: flex; gap: 0; }
+  .menu-link {
+    padding: 3px 12px; cursor: default;
+    text-decoration: none; color: var(--title-text);
+    font-weight: 500; font-size: 12px;
+  }
+  .menu-link:hover { background: var(--pink); color: #fff; border-radius: 2px; }
+  .menu-clock {
+    margin-left: auto; font-size: 12px; font-weight: 500; color: var(--text-muted);
+  }
+
+  /* ── DESKTOP ICONS ── */
+  .desktop-icons {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    justify-content: center; padding: 8px 0;
+  }
+  .desktop-icon {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    cursor: default; user-select: none; text-decoration: none; color: inherit;
+    padding: 6px 8px; width: 72px; border-radius: 4px;
+  }
+  .desktop-icon:hover { background: rgba(222,0,134,0.08); }
+  .desktop-icon .ico { font-size: 28px; }
+  .desktop-icon .ico-label {
+    font-size: 11px; text-align: center; line-height: 1.2;
+    color: var(--text);
+  }
+
+  /* ══════════ HERO ══════════ */
+  .hero-body {
+    text-align: center; padding: 28px 20px 8px;
+  }
+  .hero-eyebrow {
+    font-family: 'Silkscreen', monospace; font-size: 13px;
+    color: var(--pink); letter-spacing: 4px; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .hero-name {
+    font-family: 'Silkscreen', monospace;
+    font-size: clamp(2.2rem, 9vw, 3.8rem);
+    font-weight: 700; color: var(--pink); line-height: 1;
+  }
+  .hero-is {
+    font-size: 13px; color: var(--text-muted); margin: 4px 0 0;
+  }
+  .hero-age {
+    font-family: 'Silkscreen', monospace;
+    font-size: clamp(4rem, 16vw, 7.5rem);
+    font-weight: 700; line-height: 1;
+    color: var(--pink-dark);
+  }
+  .hero-tagline {
+    font-family: 'Silkscreen', monospace; font-size: 14px;
+    color: var(--text-muted); margin-top: 6px; letter-spacing: 1px;
+  }
+  .blink { animation: blinker 1.2s step-start infinite; }
+  @keyframes blinker { 50% { opacity: 0; } }
+  .hero-subtitle {
+    font-size: 13px; color: var(--text-muted);
+    margin-top: 12px; font-style: italic; line-height: 1.6;
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-strip {
+    overflow: hidden; background: var(--pink); padding: 5px 0;
+  }
+  .marquee-track {
+    display: inline-block; white-space: nowrap;
+    animation: marquee 18s linear infinite;
+    font-family: 'Silkscreen', monospace; font-size: 11px;
+    color: #fff; letter-spacing: 2px;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(100vw); }
+    100% { transform: translateX(-100%); }
+  }
+
+  /* ── DETAIL GRID ── */
+  .detail-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: var(--win-border); border: 1px solid var(--win-border);
+  }
+  .detail-cell { padding: 14px 12px; background: var(--win-body); }
+  .detail-label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.5px; color: var(--pink); margin-bottom: 4px;
+  }
+  .detail-value { font-size: 13px; line-height: 1.5; }
+  @media (max-width: 400px) { .detail-grid { grid-template-columns: 1fr; } }
+
+  /* ── SECTION HEAD ── */
+  .section-head {
+    font-family: 'Silkscreen', monospace; font-size: 13px; font-weight: 700;
+    color: var(--pink); margin-bottom: 10px;
+    padding-bottom: 6px; border-bottom: 1px solid var(--warm-gray);
+  }
+
+  /* ── LIST ── */
+  .activity-list { list-style: none; }
+  .activity-list li {
+    padding: 7px 0; border-bottom: 1px solid var(--warm-gray);
+    display: flex; align-items: flex-start; gap: 8px;
+    font-size: 13px; line-height: 1.5;
+  }
+  .activity-list li:last-child { border-bottom: none; }
+  .bullet { font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+
+  /* ── TAGS ── */
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .tag {
+    font-size: 11px; font-weight: 600; padding: 4px 12px;
+    border-radius: 20px; border: 1px solid;
+    cursor: default; transition: transform 0.15s;
+  }
+  .tag:hover { transform: translateY(-1px); }
+  .tag-pink { border-color: var(--pink); color: var(--pink); background: rgba(222,0,134,0.06); }
+  .tag-warm { border-color: #c87f4a; color: #c87f4a; background: rgba(200,127,74,0.06); }
+  .tag-teal { border-color: #2a9d8f; color: #2a9d8f; background: rgba(42,157,143,0.06); }
+  .tag-plum { border-color: #8e4585; color: #8e4585; background: rgba(142,69,133,0.06); }
+  .tag-coral { border-color: #e07050; color: #e07050; background: rgba(224,112,80,0.06); }
+  .tag-green { border-color: #4a9e5c; color: #4a9e5c; background: rgba(74,158,92,0.06); }
+  .tag-orange { border-color: #d4842a; color: #d4842a; background: rgba(212,132,42,0.06); }
+  .tag-blue { border-color: #3a7ec8; color: #3a7ec8; background: rgba(58,126,200,0.06); }
+  /* ── QUOTE ── */
+  .quote-body {
+    text-align: center; padding: 24px 16px;
+    background: var(--cream);
+  }
+  .quote-body blockquote {
+    font-family: 'Silkscreen', monospace;
+    font-size: clamp(11px, 2.5vw, 13px); font-weight: 400;
+    line-height: 1.7; color: var(--text); font-style: italic;
+  }
+  .quote-body cite {
+    display: block; margin-top: 10px;
+    font-size: 12px; color: var(--pink); font-style: normal;
+    letter-spacing: 1px;
+  }
+
+  /* ══════════ PLAYER ══════════ */
+  .player-chrome { background: var(--win-chrome); padding: 10px; }
+
+  .player-viz {
+    background: #1a1410; height: 44px;
+    border: 1px solid var(--win-border);
+    border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; margin-bottom: 8px;
+    position: relative;
+  }
+  .viz-text {
+    font-family: 'Silkscreen', monospace; font-size: 16px;
+    color: var(--pink); letter-spacing: 2px;
+    padding: 0 8px;
+  }
+  .viz-bars {
+    display: flex; align-items: flex-end; gap: 2px;
+    height: 32px; padding: 0 6px;
+  }
+  .viz-bar {
+    width: 4px; background: var(--pink); border-radius: 1px 1px 0 0;
+    animation: barPulse 0.7s ease-in-out infinite alternate;
+  }
+  .viz-bar.paused { animation-play-state: paused; height: 2px !important; }
+  @keyframes barPulse {
+    0% { height: 2px; }
+    100% { height: var(--h); }
+  }
+
+  .now-strip {
+    font-size: 12px; margin-bottom: 8px;
+    padding: 4px 8px; background: var(--win-body);
+    border: 1px solid var(--win-border); border-radius: 3px;
+    display: flex; gap: 6px; align-items: center;
+    overflow: hidden;
+  }
+  .now-strip .np-label { color: var(--text-muted); font-weight: 600; flex-shrink: 0; }
+  .now-strip .np-info { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  .player-controls {
+    display: flex; align-items: center; gap: 4px; margin-bottom: 8px;
+  }
+  .p-btn {
+    width: 30px; height: 26px;
+    background: var(--win-chrome); color: var(--title-text);
+    border: 1px solid var(--win-border); border-radius: 3px;
+    font-size: 12px; cursor: default;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+  }
+  .p-btn:active { background: var(--warm-gray); box-shadow: inset 0 1px 2px rgba(0,0,0,0.1); }
+  .p-btn-play {
+    width: 36px; height: 30px;
+    background: var(--pink); color: #fff; border-color: var(--pink-dark);
+    font-size: 14px; border-radius: 4px;
+  }
+  .p-btn-play:active { background: var(--pink-dark); }
+
+  .volume-wrap { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+  .vol-icon { font-size: 13px; }
+  .volume-slider {
+    width: 60px; height: 4px;
+    -webkit-appearance: none; appearance: none;
+    background: var(--warm-gray); border-radius: 2px; outline: none; cursor: default;
+  }
+  .volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 10px; height: 14px; border-radius: 2px;
+    background: var(--win-chrome); border: 1px solid var(--win-border);
+    cursor: default;
+  }
+
+  .progress-wrap { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+  .time-label {
+    font-family: 'Silkscreen', monospace; font-size: 13px;
+    color: var(--text-muted); min-width: 30px;
+  }
+  .progress-bar {
+    flex: 1; height: 8px; background: var(--warm-gray);
+    border: 1px solid var(--win-border); border-radius: 4px;
+    overflow: hidden; cursor: default;
+  }
+  .progress-bar .fill {
+    width: 0%; height: 100%; background: var(--pink);
+    border-radius: 3px; transition: width 0.3s linear;
+  }
+
+  .track-list {
+    list-style: none; max-height: 180px; overflow-y: auto;
+    background: var(--win-body);
+    border: 1px solid var(--win-border); border-radius: 3px;
+  }
+  .track-list li {
+    display: flex; align-items: center; gap: 8px;
+    padding: 4px 8px; font-size: 12px; cursor: default;
+    border-bottom: 1px solid var(--warm-gray);
+  }
+  .track-list li:last-child { border-bottom: none; }
+  .track-list li.active { background: var(--pink); color: #fff; }
+  .track-list li.active .track-num { color: rgba(255,255,255,0.7); }
+  .track-list li:not(.active):hover { background: var(--cream); }
+  .track-num { font-family: 'Silkscreen', monospace; font-size: 13px; color: var(--text-muted); width: 18px; text-align: right; flex-shrink: 0; }
+  .track-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  /* ══════════ RSVP ══════════ */
+  .rsvp-body { text-align: center; padding: 24px 16px; }
+  .rsvp-body h3 {
+    font-family: 'Silkscreen', monospace; font-size: 15px;
+    color: var(--pink); margin-bottom: 10px;
+  }
+  .rsvp-body p { font-size: 13px; line-height: 1.6; margin-bottom: 8px; }
+  .rsvp-btn {
+    display: inline-block; margin-top: 10px; padding: 8px 32px;
+    font-size: 13px; font-weight: 700; font-family: inherit;
+    background: var(--pink); color: #fff;
+    border: 1px solid var(--pink-dark); border-radius: 4px;
+    cursor: default; text-decoration: none;
+    box-shadow: 0 2px 6px rgba(222,0,134,0.25);
+    transition: transform 0.1s;
+  }
+  .rsvp-btn:active { transform: scale(0.97); }
+  .rsvp-small {
+    font-size: 11px; color: var(--text-muted); margin-top: 12px; font-style: italic;
+  }
+
+/* ══════════ COUNTDOWN ══════════ */
+  .countdown-body { text-align: center; padding: 20px 16px; }
+  .countdown-label {
+    font-family: 'Silkscreen', monospace; font-size: 12px;
+    color: var(--pink); letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .countdown-grid {
+    display: flex; justify-content: center; gap: 8px;
+  }
+  .cd-unit {
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    min-width: 60px;
+  }
+  .cd-num {
+    font-family: 'Silkscreen', monospace;
+    font-size: clamp(1.8rem, 7vw, 2.8rem);
+    font-weight: 700; line-height: 1;
+    color: var(--pink-dark);
+    background: var(--cream);
+    border: 1px solid var(--warm-gray);
+    border-radius: 4px;
+    padding: 8px 10px;
+    min-width: 54px;
+    font-variant-numeric: tabular-nums;
+  }
+  .cd-label-text {
+    font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--text-muted);
+  }
+  .cd-separator {
+    font-family: 'Silkscreen', monospace;
+    font-size: clamp(1.4rem, 5vw, 2rem);
+    color: var(--pink); font-weight: 700;
+    align-self: flex-start; padding-top: 10px;
+  }
+  .countdown-past {
+    font-family: 'Silkscreen', monospace;
+    font-size: 16px; color: var(--pink); letter-spacing: 2px;
+  }
+  @media (max-width: 420px) {
+    .cd-unit { min-width: 48px; }
+    .cd-num { min-width: 44px; padding: 6px 6px; }
+  }
+
+  /* ══════════ FOOTER ══════════ */
+  .visitor-counter {
+    text-align: center; padding: 8px;
+    font-size: 11px; color: var(--text-muted);
+  }
+  .counter-digits {
+    display: inline-block;
+    background: #1a1410; color: var(--pink);
+    padding: 2px 8px; font-family: 'Silkscreen', monospace; font-size: 14px;
+    letter-spacing: 2px; border-radius: 2px;
+    border: 1px solid var(--win-border);
+  }
+  .footer-note {
+    text-align: center; padding: 4px 16px 16px;
+    font-size: 11px; color: var(--text-muted); line-height: 1.6;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 420px) {
+    .desktop { padding: 8px 8px 32px; gap: 10px; }
+    .win-body { padding: 12px; }
+    .menu-items { display: none; }
+    .login-field label { font-size: 10px; }
+    .desktop-icon { width: 58px; }
+  }
+</style>
+
+<!-- ══════════ LOGIN ══════════ -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-pattern"></div>
+  <div class="login-box window">
+    <div class="title-bar">
+      <div class="close-box"></div>
+      <div class="win-title"><span>&#x1F512; Log In</span></div>
+      <div class="zoom-boxes"><div class="zoom-box"></div></div>
+    </div>
+    <div class="win-body" style="text-align:center; padding:24px 20px 18px;">
+      <div class="login-avatar">
+          <img src="hello-kitty.png" alt="Hello Kitty" style="width:48px; height:48px;">
+      </div>
+      <div class="login-welcome">Welcome!</div>
+      <div class="login-subtitle">Enter the password to join Karie's party.</div>
+      <form id="loginForm" onsubmit="return false;">
+        <div class="login-field">
+          <label for="pw">Password:</label>
+          <input class="text-input" type="password" id="pw" autocomplete="off">
+        </div>
+        <div class="login-error" id="loginError"></div>
+        <div class="login-actions">
+          <button class="mac-btn mac-btn-primary" type="submit">Enter</button>
+          <button class="mac-btn" type="button" onclick="return false;">Cancel</button>
+        </div>
+      </form>
+      <div class="login-hint">hint: ask Karie for the secret word</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MENU BAR ══════════ -->
+<div class="menu-bar-top">
+  <div class="menu-logo">&#x2606; Karie's 30th</div>
+  <div class="menu-items">
+    <a class="menu-link" href="#details">Info</a>
+    <a class="menu-link" href="#activities">Activities</a>
+    <a class="menu-link" href="#player">Music</a>
+    <a class="menu-link" href="#rsvp">RSVP</a>
+  </div>
+  <div class="menu-clock" id="clock">7:00 PM</div>
+</div>
+
+<!-- ══════════ DESKTOP ══════════ -->
+<div class="desktop">
+
+  <!-- DESKTOP ICONS -->
+  <div class="desktop-icons">
+    <a class="desktop-icon" href="#details">
+      <div class="ico">&#x1F4C1;</div>
+      <div class="ico-label">Party Info</div>
+    </a>
+    <a class="desktop-icon" href="#player">
+      <div class="ico">&#x1F4BF;</div>
+      <div class="ico-label">Mix CD</div>
+    </a>
+    <a class="desktop-icon" href="#activities">
+      <div class="ico">&#x1F4CB;</div>
+      <div class="ico-label">Activities</div>
+    </a>
+    <a class="desktop-icon" href="#dresscode">
+      <div class="ico">&#x1F457;</div>
+      <div class="ico-label">Dress Code</div>
+    </a>
+    <a class="desktop-icon" href="#rsvp">
+      <div class="ico">&#x2709;&#xFE0F;</div>
+      <div class="ico-label">RSVP</div>   
+    </a>
+  </div>
+
+  <!-- HERO -->
+  <div class="window hero-window">
+    <div class="title-bar">
+      <div class="close-box"></div>
+      <div class="win-title"><span>invite_final_FINAL_v3.doc</span></div>
+      <div class="zoom-boxes"><div class="zoom-box"></div></div>
+    </div>
+    <div class="win-body hero-body">
+      <div class="hero-eyebrow">&#x2605; you are cordially invited &#x2605;</div>
+      <div class="hero-name">Karie</div>
+      <div class="hero-is">is turning</div>
+      <div class="hero-age">30</div>
+      <div class="hero-tagline">"This Is What Dreams Are Made Of"<span class="blink">_</span></div>
+      <div class="hero-subtitle">Y2K throwback birthday</div>
+    </div>
+    <div class="marquee-strip">
+      <span class="marquee-track">&#x2665; Karie'S 30th &#x2665; OCT 3 2026 &#x2665; Y2K <3 &#x2665; BEST OF BOTH WORLDS &#x2665; Karie'S 30th &#x2665;</span>
+    </div>
+  </div>
+
+  <!-- COUNTDOWN -->
+  <div class="window" id="countdown">
+    <div class="title-bar">
+      <div class="close-box"></div>
+      <div class="win-title"><span>countdown.exe</span></div>
+      <div class="zoom-boxes"><div class="zoom-box"></div></div>
+    </div>
+    <div class="win-body countdown-body">
+      <div class="countdown-label">&#x23F3; Party Starts In</div>
+      <div class="countdown-grid" id="cdGrid">
+        <div class="cd-unit"><div class="cd-num" id="cdDays">00</div><div class="cd-label-text">Days</div></div>
+        <div class="cd-separator">:</div>
+        <div class="cd-unit"><div class="cd-num" id="cdHrs">00</div><div class="cd-label-text">Hours</div></div>
+        <div class="cd-separator">:</div>
+        <div class="cd-unit"><div class="cd-num" id="cdMin">00</div><div class="cd-label-text">Mins</div></div>
+        <div class="cd-separator">:</div>
+        <div class="cd-unit"><div class="cd-num" id="cdSec">00</div><div class="cd-label-text">Secs</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DETAILS -->
+  <div class="window" id="details">
+    <div class="title-bar">
+      <div class="close-box"></div>
+      <div class="win-title"><span>party_details.txt</span></div>
+      <div class="zoom-boxes"><div class="zoom-box"></div></div>
+    </div>
+    <div class="win-body">
+      <div class="detail-grid">
+        <div class="detail-cell">
+          <div class="detail-label">&#x1F4C5; Date</div>
+          <div class="detail-value">Saturday<br>October 3, 2026</div>
+        </div>
+        <div class="detail-cell">
+          <div class="detail-label">&#x231A; Time</div>
+          <div class="detail-value">2:00 PM<br><span style="font-size:11px;color:var(--text-muted)">til the music stops</span></div>
+        </div>
+        <div class="detail-cell">
+          <div class="detail-label">&#x1F4CD; Location</div>
+          <div class="detail-value">Santa Clara<br>Brookdale Dr, CA 95051</div>
+        </div>
+        <div class="detail-cell">
+          <div class="detail-label">&#x1F3AD; Theme</div>
+          <div class="detail-value">Early 2000s<br>Throwback</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTIVITIES -->
+  <div class="window" id="activities">
+    <div class="title-bar">
+      <div class="close-box"></div>
+      <div class="win-title"><span>schedule.csv</span></div>
+      <div class="zoom-boxes"><div class="zoom-box"></div></div>
+    </div>
+    <div class="win-body">
+      <div class="section-head">Activities</div>
+      <ul class="activity-list">
+        <li><span class="bullet">&#x1F4F8;</span>Photo Booth</li>
+        <li><span class="bullet">&#x1F9E0;</span>Big Brain Activities</li>
+        <li><span class="bullet">&#x1F3A4;</span>Karaoke</li>
+        <li><span class="bullet">&#x1F3C6;</span>Games</li>
+        <li><span class="bullet">&#x1F36D;</span>Snack Bar</li>
+        <li><span class="bullet">&#x1F32F;</span>Dinner Making</li>
+        <li><span class="bullet">&#x1F4FF;</span>Friendship Bracelets</li>
+        <li><span class="bullet">&#x1F3AC;</span>Spa and Movies</li>
+        <li><span class="bullet">&#x1F3B1;</span>Pool Table</li>
+        <li><span class="bullet">&#x1F3C6;</span>Win Prizes</li>
+        <li><span class="bullet">&#x1FAF6;</span>...and more!</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DRESS CODE -->
+  <div class="window" id="dresscode">
+    <div class="title-bar">
+      <div class="close-box"></div>
+      <div class="win-title"><span>dress_code.psd</span></div>
+      <div class="zoom-boxes"><div class="zoom-box"></div></div>
+    </div>
+    <div class="win-body">
+      <div class="section-head">Dress Code: Wear What You Wore At 13 </div>
+      <p style="font-size:13px; line-height:1.6; margin-bottom:8px;">It's Y2K! Wear what you wore at 13 or early 2000's!!
+        <p style="font-size:10px;">(Even easier: wear a shirt with your fav cartoon character!)</p>
+      <div class="tag-cloud">
+        <span class="tag tag-pink">Bootcut Jeans</span>
+        <span class="tag tag-plum">Butterfly Clips</span>
+        <span class="tag tag-teal">Baby Tee</span>
+        <span class="tag tag-green">Platform Shoes</span>
+        <span class="tag tag-coral">Tube Top</span>
+        <span class="tag tag-pink">Skinny or Baggy Jeans</span>
+        <span class="tag tag-plum">Bedazzled Everything</span>
+        <span class="tag tag-teal">Lip Gloss</span>
+        <span class="tag tag-coral">Tiny Sunglasses</span>
+        <span class="tag tag-blue">Basketball Jersey</span>
+        <span class="tag tag-green">Choker</span>
+        <span class="tag tag-orange">Graphic Shirts</span>          
+      </div>
+    </div>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="window">
+    <div class="title-bar">
+      <div class="close-box"></div>
+      <div class="win-title"><span>away_message.aim</span></div>
+      <div class="zoom-boxes"><div class="zoom-box"></div></div>
+    </div>
+    <div class="quote-body">
+      <blockquote>status: offline (celebrating 30 🎂)</blockquote>
+      <cite>oAznGrlo</cite>
+    </div>
+  </div>
+
+  <!-- PLAYER -->
+  <div class="window" id="player">
+    <div class="title-bar">
+      <div class="close-box"></div>
+      <div class="win-title"><span>&#x1F3B5; karaoke.mp3</span></div>
+      <div class="zoom-boxes"><div class="zoom-box"></div></div>
+    </div>
+    <div class="player-chrome">
+      <div class="player-viz">
+        <div class="viz-bars" id="vizBars"></div>
+        <span class="viz-text" id="vizText">&#x25B6; Press Play</span>
+      </div>
+      <div class="now-strip">
+        <span class="np-label">Now Playing:</span>
+        <span class="np-info"><span id="npTrack">So Yesterday</span> &mdash; <span id="npArtist">Hilary Duff</span></span>
+      </div>
+      <div class="player-controls">
+        <button class="p-btn" id="prevBtn" title="Previous">&#x23EE;</button>
+        <button class="p-btn p-btn-play" id="playBtn" title="Play">&#x25B6;</button>
+        <button class="p-btn" id="nextBtn" title="Next">&#x23ED;</button>
+        <button class="p-btn" title="Stop">&#x25A0;</button>
+        <div class="volume-wrap">
+          <span class="vol-icon">&#x1F509;</span>
+          <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.7">
+        </div>
+      </div>
+      <div class="progress-wrap" id="progressWrap">
+        <span class="time-label" id="timeCurrent">0:00</span>
+        <div class="progress-bar"><div class="fill" id="progressFill"></div></div>
+        <span class="time-label" id="timeTotal">0:00</span>
+      </div>
+      <ol class="track-list" id="trackList"></ol>
+    </div>
+  </div>
+
+  <!-- RSVP -->
+  <div class="window" id="rsvp">
+    <div class="title-bar">
+      <div class="close-box"></div>
+      <div class="win-title"><span>RSVP_pl0x.html</span></div>
+      <div class="zoom-boxes"><div class="zoom-box"></div></div>
+    </div>
+    <div class="win-body rsvp-body">
+      <h3>Party with us?</h3>
+      <p>RSVP via button below by <strong>October 1st</strong>!</p>
+      <p>hope to see u there!!</p>
+      <a class="rsvp-btn" href="https://forms.gle/drAkA7qeZuJhwSHL9">&#x2709; RSVP NOW</a>
+      <div class="rsvp-small">~ capacity limited ~ first come first served ~</div>
+    </div>
+  </div>
+
+  <!-- COUNTER -->
+  <div class="visitor-counter">
+    visitors: <span class="counter-digits" id="counter">10967</span>
+  </div>
+  <div class="footer-note">
+    best viewed with your Neopet &bull; msg me on AIM<br>
+    &copy; oAznGrlo
+  </div>
+</div>
+
+
+<canvas class="sparkle-canvas" aria-hidden="true"></canvas>
+<div class="stars-bg" aria-hidden="true" id="starsBg"></div>
+
+<script>
+  // ═══ PASSWORD ═══
+  const PARTY_PASSWORD = 'hello30s';
+  const loginOverlay = document.getElementById('loginOverlay');
+  const loginForm = document.getElementById('loginForm');
+  const loginError = document.getElementById('loginError');
+  const pwInput = document.getElementById('pw');
+
+  try { if (sessionStorage.getItem('karie30_unlocked') === '1') loginOverlay.classList.add('hidden'); } catch(e) {}
+
+  loginForm.addEventListener('submit', () => {
+    if (pwInput.value.toLowerCase().trim() === PARTY_PASSWORD) {
+      loginOverlay.classList.add('hidden');
+      try { sessionStorage.setItem('karie30_unlocked', '1'); } catch(e) {}
+    } else {
+      loginError.textContent = 'Wrong password! Try again ❤';
+      pwInput.value = '';
+      pwInput.focus();
+    }
+  });
+  setTimeout(() => { if (!loginOverlay.classList.contains('hidden')) pwInput.focus(); }, 300);
+
+  // ═══ VISUALIZER ═══
+  const vizBars = document.getElementById('vizBars');
+  const vizText = document.getElementById('vizText');
+  const heights = [10,18,7,24,13,20,9,26,12,16,22,8,19,14,25,11,17,10,21,6];
+  heights.forEach((h, i) => {
+    const b = document.createElement('div');
+    b.className = 'viz-bar paused';
+    b.style.setProperty('--h', h + 'px');
+    b.style.animationDelay = (i * 0.08) + 's';
+    vizBars.appendChild(b);
+  });
+    
+  // ═══ FLOATING STARS ═══
+  (function() {
+    var bg = document.getElementById('starsBg');
+    var symbols = ['✦', '✧', '★', '☆', '✶', '♡'];
+    for (var i = 0; i < 25; i++) {
+      var el = document.createElement('span');
+      el.className = 'star-float';
+      el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      el.style.left = (Math.random() * 100) + '%';
+      el.style.animationDuration = (12 + Math.random() * 18) + 's';
+      el.style.animationDelay = (Math.random() * 20) + 's';
+      el.style.fontSize = (0.6 + Math.random() * 1.2) + 'rem';
+      el.style.color = ['#FF2D9B','#D8B4FE','#7DF9FF','#FFF06B','#BFFF00'][Math.floor(Math.random()*5)];
+      bg.appendChild(el);
+    }
+  })();
+
+  // ═══ COUNTDOWN ═══
+  const PARTY_DATE = new Date(2026, 9, 3, 15, 0, 0);
+  const cdDays = document.getElementById('cdDays');
+  const cdHrs = document.getElementById('cdHrs');
+  const cdMin = document.getElementById('cdMin');
+  const cdSec = document.getElementById('cdSec');
+  const cdGrid = document.getElementById('cdGrid');
+
+  function updateCountdown() {
+    const now = new Date();
+    const diff = PARTY_DATE - now;
+    if (diff <= 0) {
+      cdGrid.innerHTML = '<div class="countdown-past">&#x1F389; IT\'S PARTY TIME &#x1F389;</div>';
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    cdDays.textContent = String(d).padStart(2, '0');
+    cdHrs.textContent = String(h).padStart(2, '0');
+    cdMin.textContent = String(m).padStart(2, '0');
+    cdSec.textContent = String(s).padStart(2, '0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // CURSOR
+    (function() {
+      var canvas = document.querySelector('.sparkle-canvas');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var particles = [];
+      var colors = ['#FF2D9B','#D8B4FE','#7DF9FF','#FFF06B','#FF69B4'];
+      var mouse = { x: -100, y: -100 };
+      var frame = 0;
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      document.addEventListener('mousemove', function(e) {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      });
+
+      function spawn() {
+        for (var i = 0; i < 2; i++) {
+          particles.push({
+            x: mouse.x + (Math.random() - 0.5) * 16,
+            y: mouse.y + (Math.random() - 0.5) * 16,
+            vx: (Math.random() - 0.5) * 1.5,
+            vy: (Math.random() - 0.5) * 1.5 - 0.5,
+            life: 1,
+            size: 2 + Math.random() * 4,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            isStar: Math.random() > 0.5
+          });
+        }
+      }
+
+      function drawStar(cx, cy, r, color, alpha) {
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        for (var i = 0; i < 4; i++) {
+          var angle = (i * Math.PI) / 2;
+          ctx.moveTo(cx, cy);
+          ctx.lineTo(cx + Math.cos(angle) * r, cy + Math.sin(angle) * r);
+          ctx.lineTo(cx + Math.cos(angle + Math.PI/4) * r * 0.35, cy + Math.sin(angle + Math.PI/4) * r * 0.35);
+        }
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function tick() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        frame++;
+        if (frame % 2 === 0 && mouse.x > 0) spawn();
+
+        for (var i = particles.length - 1; i >= 0; i--) {
+          var p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.life -= 0.025;
+          if (p.life <= 0) {
+            particles.splice(i, 1);
+            continue;
+          }
+          if (p.isStar) {
+            drawStar(p.x, p.y, p.size, p.color, p.life);
+          } else {
+            ctx.globalAlpha = p.life;
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+        if (particles.length > 150) particles.splice(0, particles.length - 150);
+        requestAnimationFrame(tick);
+      }
+      tick();
+    })();
+
+
+  // ═══ CLOCK ═══
+  function tick() {
+    const d = new Date();
+    let h = d.getHours(), m = d.getMinutes();
+    const ap = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    document.getElementById('clock').textContent = h + ':' + String(m).padStart(2,'0') + ' ' + ap;
+  }
+  tick(); setInterval(tick, 30000);
+
+  // ═══ COUNTER ═══
+  let count = 10967;
+  setInterval(() => {
+    count += Math.floor(Math.random() * 3);
+    document.getElementById('counter').textContent = String(count).padStart(6,'0');
+  }, 4000);
+
+  // ═══ AUDIO PLAYER ═══
+  const playlist = [
+    { title:'Start of Something New', artist:'High School Musical', src:'songs/01.mp3' },
+    { title:'What Dreams Are Made Of', artist:'Hilary Duff', src:'songs/02.mp3' },
+    { title:'When I Grow Up', artist:'The Pussycat Dolls', src:'songs/03.mp3' },
+    { title:'Hakuna Matata', artist:'Lion King', src:'songs/04.mp3' },
+    { title:"Wannabe", artist:"Spice Girls", src:'songs/05.mp3' },
+    { title:'Who Says', artist:'Selena Gomez', src:'songs/06.mp3' },
+    { title:'Ready or Not', artist:'Bridgit Mendler', src:'songs/07.mp3' },
+    { title:'This Is The Life', artist:'Hannah Montana', src:'songs/08.mp3' },
+    { title:'Unwritten', artist:'Natasha Bedingfield', src:'songs/09.mp3' },
+    { title:'Go the Distance', artist:'Hercules', src:'songs/10.mp3' },
+  ];
+
+  const audio = new Audio();
+  let cur = 0, playing = false;
+  const playBtn = document.getElementById('playBtn');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const npTrack = document.getElementById('npTrack');
+  const npArtist = document.getElementById('npArtist');
+  const fill = document.getElementById('progressFill');
+  const progressWrap = document.getElementById('progressWrap');
+  const tCur = document.getElementById('timeCurrent');
+  const tTot = document.getElementById('timeTotal');
+  const vol = document.getElementById('volumeSlider');
+  const tl = document.getElementById('trackList');
+
+  function renderList() {
+    tl.innerHTML = '';
+    playlist.forEach((t, i) => {
+      const li = document.createElement('li');
+      li.innerHTML = '<span class="track-num">' + String(i+1).padStart(2,'0') + '</span><span class="track-name">' + t.title + ' — ' + t.artist + '</span>';
+      if (i === cur) li.classList.add('active');
+      li.addEventListener('click', () => { load(i); play(); });
+      tl.appendChild(li);
+    });
+  }
+
+  function fmt(s) { return !s || isNaN(s) ? '0:00' : Math.floor(s/60) + ':' + String(Math.floor(s%60)).padStart(2,'0'); }
+
+  function load(i) {
+    cur = i;
+    const t = playlist[cur];
+    audio.src = t.src;
+    npTrack.textContent = t.title;
+    npArtist.textContent = t.artist;
+    fill.style.width = '0%';
+    tCur.textContent = '0:00';
+    tTot.textContent = '0:00';
+    tl.querySelectorAll('li').forEach((li, j) => li.classList.toggle('active', j === cur));
+  }
+
+  function play() {
+    audio.play().catch(() => {});
+    playing = true;
+    playBtn.innerHTML = '⏸';
+    vizText.hidden = true;
+    vizBars.style.display = 'flex';
+    vizBars.querySelectorAll('.viz-bar').forEach(b => b.classList.remove('paused'));
+  }
+
+  function pause() {
+    audio.pause();
+    playing = false;
+    playBtn.innerHTML = '▶';
+    vizBars.querySelectorAll('.viz-bar').forEach(b => b.classList.add('paused'));
+  }
+
+  playBtn.addEventListener('click', () => playing ? pause() : play());
+  prevBtn.addEventListener('click', () => { if (audio.currentTime > 3) audio.currentTime = 0; else { load((cur-1+playlist.length)%playlist.length); play(); } });
+  nextBtn.addEventListener('click', () => { load((cur+1)%playlist.length); play(); });
+
+  audio.addEventListener('timeupdate', () => {
+    if (audio.duration) { fill.style.width = (audio.currentTime/audio.duration*100)+'%'; tCur.textContent = fmt(audio.currentTime); }
+  });
+  audio.addEventListener('loadedmetadata', () => { tTot.textContent = fmt(audio.duration); });
+  progressWrap.querySelector('.progress-bar').addEventListener('click', e => {
+    if (!audio.duration) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    audio.currentTime = ((e.clientX-r.left)/r.width) * audio.duration;
+  });
+  audio.volume = 0.7;
+  vol.addEventListener('input', e => audio.volume = parseFloat(e.target.value));
+  audio.addEventListener('ended', () => { load((cur+1)%playlist.length); play(); });
+
+  load(0);
+  renderList();
+</script>
