@@ -895,17 +895,7 @@
 
 <script>
   // ═══ PASSWORD ═══
-  
-  function simpleHash(str) {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    hash = ((hash << 5) - hash) + str.charCodeAt(i);
-    hash |= 0;
-  }
-  return hash;
-
-}
-  const PASSWORD_HASH = 'hello30s'; 
+  const PARTY_PASSWORD = 'hello30s';
   const loginOverlay = document.getElementById('loginOverlay');
   const loginForm = document.getElementById('loginForm');
   const loginError = document.getElementById('loginError');
@@ -914,7 +904,7 @@
   try { if (sessionStorage.getItem('karie30_unlocked') === '1') loginOverlay.classList.add('hidden'); } catch(e) {}
 
   loginForm.addEventListener('submit', () => {
-    if (simpleHash(pwInput.value.toLowerCase().trim()) === PASSWORD_HASH) {
+    if (pwInput.value.toLowerCase().trim() === PARTY_PASSWORD) {
       loginOverlay.classList.add('hidden');
       try { sessionStorage.setItem('karie30_unlocked', '1'); } catch(e) {}
     } else {
